@@ -1,37 +1,45 @@
-import React from "react";
-import { Data } from "../Data";
-const Cards = () => {
+import React, { useState } from "react";
+import './Cards.css'
+
+const Cards = (props) => {
+  let item = props.ele; 
+  const [mainImg,setMainImg] = useState(item.image.img_1);
+  const [isSelected,setIsSelected] = useState(false);
   return (
     <>
-  <div className="container">
-    <div className="row">
     
-       {Data.map((ele)=>{
-        return(
-      <div className="col-12 col-md-6 col-lg-4">
-    <div className="card" style={{borderRadius:"50rem"}}>
-  <img src={ele.img} alt={ele.title} class="card-img-top" />
-  <div class="card-body">
-    <h5 class="card-title">Card Title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <div class="card-footer row align-items-center">
-    <div class="col-sm-4">
-      <img  src={ele.image.img_1} alt={ele.title} class="card-img-top" />
-    </div>
-    <div class="col-sm-4">
-      <img  src={ele.image.img_2} alt={ele.title} class="card-img-top" />
-    </div>
-    <div class="col-sm-4">
-      <img  src={ele.image.img_3} alt={ele.title} class="card-img-top"/>
-    </div>
-  </div>
-</div>
-</div>
-      
-      )})}
-    
-      </div>
+      <div className="SingerCard">
+        <div className="image_div">
+          <img className="main-image" src={mainImg} alt=""/>
+        </div>
+        <div className="content_div">
+          <div className="name_postdiv">
+            <h1 className="large">{item.title}</h1>
+            <p className="small">{item.type}</p>
+          </div>
+          <p className="medium_text" style={{marginBottom: "0.5rem"}}>Location</p>
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.7rem"}}>
+            <p className="medium_text">Event Booking</p>
+            <p className="small" style={{fontStyle: "italic", fontWeight: "600", paddingRight: "7px"}}>{item.event}</p>
+          </div>
+          <div className="image_url_div">
+            <div>
+              <img className="thumbnail" src={item.image.img_1} alt="" onClick={(e)=>setMainImg(e.target.src)}/>
+            </div>
+            <div>
+            <img className="thumbnail" src={item.image.img_2} alt="" onClick={(e)=>setMainImg(e.target.src)}/>
+            </div>
+            <div>
+            <img className="thumbnail" src={item.image.img_3} alt="" onClick={(e)=>setMainImg(e.target.src)}/>
+            </div>
+            <div>
+            <img className="thumbnail" src={item.image.img_4} alt="" onClick={(e)=>setMainImg(e.target.src)}/>
+            </div>
+          </div>
+        </div>
+        <div className="selectBTN">
+          <p id="text" className="large" onClick={()=>setIsSelected(!isSelected)}>{isSelected?"SELECTED":"SELECT"}</p>
+        </div>
       </div>
     </>
   );
@@ -40,27 +48,6 @@ const Cards = () => {
 export default Cards;
 
 
- {/* //     <div className="card">
-      //     <div>
-      //   <img className="card-img-top" src={ele.img} alt={ele.title}/>
-      // </div>
-      // <div className="card-body">
-      //   <div className="card-text">
-      //     <h1>{ele.title}</h1>
-      //     <p>{ele.type}</p>
-      //   </div>
-      //   <p>Location</p>
-      //   <div>
-      //     <p>Event Booking</p>
-      //     <p>{ele.event}</p>
-      //   </div>
-      //   <div className="container-fluid mt-3 d-flex flex-row" >
-      //     <div><img className="p-2" src={ele.image.img_1} alt={ele.title} style={{maxHeight: "50px", maxWidth: "50px"}}/></div>
-      //     <div><img className="p-2" src={ele.image.img_2} alt={ele.title} style={{maxHeight: "50px", maxWidth: "50px"}}/></div>
-      //     <div><img className="p-2" src={ele.image.img_3} alt={ele.title} style={{maxHeight: "50px", maxWidth: "50px"}}/></div>
-      //   </div>
-      // </div>
-      // <div>
-      //   <p>SELECT</p>
-      // </div>
-//     </div> </div> */}
+
+
+
