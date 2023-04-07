@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Cards from './Cards'
 import './Singers.css'
-import { Data } from "../Data";
 
 const Singers = () => {
+    const [data,setData] = useState([]);
+    const getData=()=>{
+        fetch('https://starclinch-4885e-default-rtdb.firebaseio.com/Data.json'
+        ,{
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        }
+        )
+          .then((response)=>{
+            return response.json();
+          })
+          .then((myJson)=>{
+            setData(myJson)
+          });
+      }
+      useEffect(()=>{
+        getData()
+      },[])
   return (
     <div className='Singers maxWidth'>
         <h1 className="SingersHeading">Shortlist</h1>
@@ -29,7 +48,7 @@ const Singers = () => {
             <p className="medium textmaxwidth">Select an artist that matches your vibe.</p>
         </center>
         <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
-            {Data.map((ele)=><Cards key={ele.id} ele={ele}/>)}
+            {data.map((ele)=><Cards key={ele.id} ele={ele}/>)}
         </div>
     </div>
   )
